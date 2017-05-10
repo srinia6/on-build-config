@@ -36,26 +36,26 @@ node{
             // Create an instance of UnitTest/UnitTest.groovy
             def unit_test = load("jobs/UnitTest/UnitTest.groovy")
             // Create an instance of FunctionTest/FunctionTest.groovy
-            def function_test = load("jobs/FunctionTest/FunctionTest.groovy")
+            //def function_test = load("jobs/FunctionTest/FunctionTest.groovy")
 
             try{
                 stage("Unit Test"){
                     // Call the function runTest to run unit test
                     unit_test.runTest(env.stash_manifest_name, env.stash_manifest_path, repo_dir)
                 }
-                stage("Function Test"){
+                //stage("Function Test"){
                     // Call the function run to run function test
-                    function_test.manifestTest(TESTS, env.stash_manifest_name, env.stash_manifest_path, repo_dir, test_type)
-                }
+                //    function_test.manifestTest(TESTS, env.stash_manifest_name, env.stash_manifest_path, repo_dir, test_type)
+                //}
             } finally{
                 unit_test.archiveArtifactsToTarget("UnitTest")
-                function_test.archiveArtifactsToTarget("FunctionTest", TESTS, test_type)
+                //function_test.archiveArtifactsToTarget("FunctionTest", TESTS, test_type)
             }
             Boolean create_tag = false
             Boolean publish = PUBLISH.toBoolean()
-            shareMethod.buildAndPublish(publish, create_tag, repo_dir)
+            //shareMethod.buildAndPublish(publish, create_tag, repo_dir)
         } finally{
-            shareMethod.sendResult(true, true)
+            //shareMethod.sendResult(true, true)
         }
     }
 }
