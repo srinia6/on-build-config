@@ -110,9 +110,9 @@ def buildAndPublish(Boolean publish, Boolean tag, String repo_dir){
 
     //buildImages(repo_dir)
 
-    if(tag){
-        createTag(repo_dir)
-    }
+    //if(tag){
+    //    createTag(repo_dir)
+    //}
     //if(publish){
     //    publishImages(repo_dir)
     //}
