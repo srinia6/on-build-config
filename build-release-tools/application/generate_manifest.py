@@ -36,6 +36,7 @@ import os
 import sys
 import argparse
 from dateutil.parser import parse
+import time
 from datetime import datetime,timedelta
 
 try:
@@ -89,20 +90,6 @@ def parse_command_line(args):
     parsed_args = parser.parse_args(args)
     return parsed_args
 
-def convert_date(date_str):
-    try:
-        if date_str == "yesterday":
-            utc_now = datetime.utcnow()
-            utc_yesterday = utc_now + timedelta(days=-1)
-            date = utc_yesterday.strftime('%Y%m%d 23:59:59')
-            dt = parse(date)
-            return dt
-        else:
-            dt = parse(date_str)
-            return dt
-    except Exception, e:
-        raise ValueError(e)
-
 def main():
     try:
         # parse arguments
@@ -112,15 +99,24 @@ def main():
         if args.branch is not None and args.date is not None and args.timezone is not None:
             slice_branch = args.branch.split("/")[-1]
             if args.date == "current":
-                utc_now = datetime.utcnow()
-                day_str = utc_now.strftime("%Y%m%d")
-                dest_manifest = "{branch}-{day}".format(branch=slice_branch, day=day_str)
+                #utc_now = datetime.utcnow()
+                #day_str = utc_now.strftime("%Y%m%d")
+                timestamp = str(int(time.time()))
+                dest_manifest = "{branch}-{time}".format(branch=slice_branch, time=timestamp)
                 generator = ManifestGenerator(dest_manifest, args.branch, args.builddir, git_credential=args.git_credential, jobs=args.jobs, force=args.force)
             else:
-                dt = convert_date(args.date)
-                day_str = dt.strftime("%Y%m%d")
-                dest_manifest = "{branch}-{day}".format(branch=slice_branch, day=day_str)
-                date_str = "{0} {1}".format(dt.strftime("%Y-%m-%d %H:%M:%S"), args.timezone)
+                #dt = convert_date(args.date)
+                #day_str = dt.strftime("%Y%m%d")
+                timestamp = args.date
+                try:
+                    dt = datetime.fromtimestamp(float(timestamp))
+                except ValueError as e:
+                    print e
+                    sys.exit(1)
+                dest_manifest = "{branch}-{time}".format(branch=slice_branch, time=timestamp)
+                print(dt.tzinfo)
+                date_str = "{0} {1}".format(dt.strftime("%Y-%m-%d %H:%M:%S"), "+{0}".format(time.timezone / 36))
+                print date_str
                 generator = SpecifyDayManifestGenerator(dest_manifest, args.branch, date_str, args.builddir, git_credential=args.git_credential, jobs=args.jobs, force=args.force)
         else:
             generator = ExistDirManifestGenerator(dest_manifest, args.builddir, git_credential=args.git_credential, jobs=args.jobs, force=args.force)
