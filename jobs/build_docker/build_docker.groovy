@@ -20,7 +20,7 @@ node(build_docker_node){
                 usernamePassword(credentialsId: 'ff7ab8d2-e678-41ef-a46b-dd0e780030e1',
                                  passwordVariable: 'SUDO_PASSWORD',
                                  usernameVariable: 'SUDO_USER'),
-                usernameColonPassword(credentialsId: 'a94afe79-82f5-495a-877c-183567c51e0b', 
+                usernameColonPassword(credentialsId: 'f966b0fd-a85f-45fe-ac6a-f160aca367e8', 
                                       variable: 'BINTRAY_CREDS')]){
                 timeout(90){
                     withEnv(["WORKSPACE=${current_workspace}"]){

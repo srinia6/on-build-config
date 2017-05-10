@@ -11,7 +11,7 @@ node{
             checkout scm
         }
         withCredentials([
-            usernamePassword(credentialsId: 'a94afe79-82f5-495a-877c-183567c51e0b', 
+            usernamePassword(credentialsId: 'f966b0fd-a85f-45fe-ac6a-f160aca367e8', 
             passwordVariable: 'BINTRAY_API_KEY', 
             usernameVariable: 'BINTRAY_USERNAME')
             ]){

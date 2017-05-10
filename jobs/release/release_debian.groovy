@@ -13,7 +13,7 @@ node(build_debian_node){
             unstash "debians"
         }
         withCredentials([
-            usernameColonPassword(credentialsId: 'a94afe79-82f5-495a-877c-183567c51e0b', 
+            usernameColonPassword(credentialsId: 'f966b0fd-a85f-45fe-ac6a-f160aca367e8', 
                                   variable: 'BINTRAY_CREDS')]){
             sh './on-build-config/jobs/release/release_debian.sh'
         }

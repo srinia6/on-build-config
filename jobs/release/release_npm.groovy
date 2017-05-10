@@ -8,7 +8,7 @@ node{
             checkout scm
         }
         withCredentials([
-            usernameColonPassword(credentialsId: 'a94afe79-82f5-495a-877c-183567c51e0b', 
+            usernameColonPassword(credentialsId: 'f966b0fd-a85f-45fe-ac6a-f160aca367e8', 
                                   variable: 'BINTRAY_CREDS'), 
             usernamePassword(credentialsId: '736849f6-ba2c-489d-b5ca-d1b1f4be2252', 
                              passwordVariable: 'NPM_TOKEN', 
