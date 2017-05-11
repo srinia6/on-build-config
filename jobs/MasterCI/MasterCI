@@ -48,7 +48,7 @@ node{
                 //    function_test.manifestTest(TESTS, env.stash_manifest_name, env.stash_manifest_path, repo_dir, test_type)
                 //}
             } finally{
-                unit_test.archiveArtifactsToTarget("UnitTest")
+                //unit_test.archiveArtifactsToTarget("UnitTest")
                 //function_test.archiveArtifactsToTarget("FunctionTest", TESTS, test_type)
             }
             Boolean create_tag = false
